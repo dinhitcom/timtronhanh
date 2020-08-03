@@ -1,0 +1,36 @@
+extends layout
+block content
+    .container
+        .row 
+            #user_sidebar.col-md-3
+                p#welcome.text-center Xin chào #{data.fname} #{data.lname}!
+                .avatar.text-center
+                    if data.avatar
+                        img.rounded-circle(src='/'+data.avatar)
+                    else 
+                        img.rounded-circle(src='/images/avatar_template.png')
+                    
+                ul.nav.flex-column.sidebar
+                    li.nav-item
+                        a.nav-link(href='/users/dashboard') Quản lý tài khoản
+                    li.nav-item.sidebar.active
+                        a.nav-link(href='/users/posts') Quản lý bài đăng
+                
+
+            .col-md-9
+                each post in posts
+                    .row.post_manage
+                        .col-md-3.post_image
+                            img(src='/'+post.images[0])
+                        .col-md-7.post_content
+                            p.title=post.tieu_de
+                            p.price=post.gia
+                            p=post.dia_chi+`, `+post.phuong_xa+`, `+post.quan_huyen 
+                        .col-md-2.post_option
+                            .option
+                                a(href='/posts/'+post.id) Xem 
+                            .option 
+                                a(href='/posts/'+post.id+'/edit') Sửa
+                            .option
+                                a(href='/posts/'+post.id+'/delete', onclick='confirm(`Bạn có chắc chắn muốn xóa bài viết không?`)') Xóa
+                    hr

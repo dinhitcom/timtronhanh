@@ -1,0 +1,38 @@
+extends layout
+block content
+    .container
+        .row 
+            #user_sidebar.col-md-3
+                p#welcome.text-center Xin chào #{data.fname} #{data.lname} 
+                .avatar.text-center
+                    if data.avatar
+                        img.rounded-circle(src='/'+data.avatar)
+                    else 
+                        img.rounded-circle(src='/images/avatar_template.png')
+                    
+                ul.nav.flex-column.sidebar
+                    li.nav-item.sidebar.active
+                        a.nav-link(href='/users/dashboard') Quản lý toàn bộ tài khoản
+                    li.nav-item
+                        a.nav-link(href='/users/posts') Quản lý toàn bộ bài viết
+            .col-md-9
+                if result == 'null'
+                    .row 
+                        h3 Người dùng này chưa đăng tin nào
+                else
+                    each val in data
+                        .row.post_manage
+                            .col-md-3.post_image
+                                img(src='/'+val.images[0])
+                            .col-md-7.post_content
+                                p.title=val.tieu_de
+                                p.price=val.gia
+                                p=val.dia_chi+`, `+val.phuong_xa+`, `+val.quan_huyen 
+                            .col-md-2.post_option
+                                .option
+                                    a(href='/posts/'+val.id) Xem 
+                                .option 
+                                    a(href='/posts/'+val.id+'/edit') Sửa
+                                .option
+                                    a(href='/posts/'+val.id+'/delete', onclick='confirm(`Bạn có chắc chắn muốn xóa bài viết không?`)') Xóa
+                        hr

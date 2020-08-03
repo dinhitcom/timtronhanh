@@ -1,0 +1,18 @@
+extends layout
+block content
+    .container
+        //- each district in districts
+        //-     p.title.mt-3=distrct.name_with_type
+        .row.text-center
+                each post in data 
+                    .col-md-4.pb-1.pb-md-0.mb-3
+                        .post_container
+                            .post_img
+                                a(href='/posts/'+post._id style='text')
+                                    img(src=`/`+post.images[0])
+                            p.post_title=post.tieu_de
+                            .post_body
+                                p.price=post.gia
+                                p.mt-2=post.dia_chi+`, `+post.phuong_xa+`, `+post.quan_huyen 
+                                a.btn.btn-info.post_btn(href='/posts/'+post._id) Xem chi tiết
+    script(src='/javascripts/index.js')

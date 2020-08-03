@@ -1,0 +1,150 @@
+extends layout
+block content
+  .container
+    .row.mt-5
+      .col-md-8.slideshow_container
+        .image_container
+            each image in post.images
+              .mySlides
+                img(src=`\\`+image, style='width:100%')
+
+            a.prev(onclick='plusSlides(-1)') &#x276E;
+            a.next(onclick='plusSlides(1)') &#x276F;
+
+        .row
+          each image, index in post.images
+            .col-lg-3
+                img.demo.cursor(src=`\\`+image, style='width:100%', onclick='currentSlide('+index+')')             
+        
+      .col-md-4.mt-5
+        h4=post.tieu_de
+        p.address=post.dia_chi+`, `+post.phuong_xa+`, `+post.quan_huyen
+        p.text-right.postTime#timeformat Ngày đăng: #{post.ngay_dang}
+        p#price=post.gia 
+        .container#contact_information
+            .row
+                p.contact_title Liên hệ
+            .row
+                i.fa.fa-user.text  
+                    span.contact_text #{post.ho_ten}
+            .row 
+                a(href='mailto:'+post.email)
+                    i.fa.fa-envelope.text 
+                        span.contact_text #{post.email}
+            .row 
+                a(href=post.facebook ? post.facebook : 'https://www.facebook.com')
+                    i.fa.fa-facebook
+                        span.contact_text Facebook
+            .row 
+                a.btn.btn-info(href='tel:'+post.dien_thoai)
+                    i.fa.fa-phone
+                        span.contact_btn_text #{post.dien_thoai}
+    p.mt-3.title Thông tin
+    .row
+        .col-md-8
+            table.table
+                tr 
+                    td.head Địa chỉ:
+                    td(colspan='3')=post.dia_chi+`, `+post.phuong_xa+`, `+post.quan_huyen 
+                tr
+                    td.head Hình thức trọ:
+                    td=post.hinh_thuc_tro
+                    td.head Quản lý:
+                    td=post.quan_ly
+                tr 
+                    td.head Phòng trống:
+                    td=post.so_phong_trong
+                    td.head Tổng số phòng:
+                    td=post.tong_so_phong
+                tr 
+                    td.head Số người tối đa:
+                    td=post.o_toi_da
+                        span &nbsp;người/phòng
+                    td.head Giới tính ưu tiên:
+                    td=post.gioi_tinh
+                tr
+                    td.head Diện tích phòng:
+                    td=post.dien_tich+` m` 
+                        sup 2
+    p.title.mt-3 Đối tượng
+    .row
+        each val in post.doi_tuong 
+            .col-md-2 
+                .row
+                    .col-3
+                        case val
+                            when "Đi học"
+                                i.icon.fas.fa-user-graduate
+                            when "Đi làm"
+                                i.icon.fas.fa-briefcase
+                            when "Gia đình"
+                                i.icon.fas.fa-home
+                            when "Cặp đôi"
+                                i.icon.fas.fa-user-friends
+                    .col-7   
+                        p=val
+    p.title.mt-3 Mô tả
+    .row
+        .col-md-8
+            p=post.mo_ta
+    p.title.mt-3 Tiện nghi
+    .row
+        .col-md-8
+            .row
+                each val in post.tien_nghi 
+                    .col-md-4
+                        .row
+                            .col-3
+                                case val
+                                    when "Gác lửng"
+                                        i.icon.fas.fa-home
+                                    when "Tủ lạnh"
+                                        i.icon.fas.fa-briefcase
+                                    when "Giường"
+                                        i.icon.fas.fa-bed
+                                    when "Wifi"
+                                        i.icon.fas.fa-wifi
+                                    when "Kệ bếp"
+                                        .icon &#x1f373; 
+                                    when "Camera an ninh"
+                                        i.icon.fas.fa-video-camera
+                                    when "Vệ sinh trong"
+                                        i.icon.fas.fa-toilet
+                                    when "Máy giặt"
+                                        .icon 🧺
+                                    when "Ban công/sân thượng"
+                                        i.icon.fas.fa-home
+                                    when "Điều hòa"
+                                        .icon ❄️
+                                    when "Tivi"
+                                        i.icon.fas.fa-tv
+                                    when "Bình nóng lạnh"
+                                        .icon 🌡️
+                            .col-7   
+                                p=val
+    p.title.mt-3 Môi trường xunh quanh
+    .row
+        .col-md-8
+            .row
+                each val in post.moi_truong 
+                    .col-md-4
+                        .row
+                            .col-3
+                                case val
+                                    when "Chợ"
+                                        i.icon.fas.fa-shopping-basket
+                                    when "Siêu thị"
+                                        i.icon.fas.fa-shopping-cart
+                                    when "Bệnh viện"
+                                        i.icon.fas.fa-hospital
+                                    when "Trường học"
+                                        i.icon.fas.fa-graduation-cap
+                                    when "Công viên"
+                                        .icon 🏞️ 
+                                    when "Bến xe Bus"
+                                        i.icon.fas.fa-bus
+                                    when "Phòng gym"
+                                        i.icon.fas.fa-dumbbell
+                            .col-7   
+                                p=val
+  script(src='/javascripts/posts.js')

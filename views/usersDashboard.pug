@@ -1,0 +1,62 @@
+extends layout
+block content
+    .container
+        .row 
+            #user_sidebar.col-md-3
+                p#welcome.text-center Xin chào #{data.fname} #{data.lname}!
+                .avatar.text-center
+                    if data.avatar
+                        img.rounded-circle(src='/'+data.avatar)
+                    else 
+                        img.rounded-circle(src='/images/avatar_template.png')
+                    
+                ul.nav.flex-column.sidebar
+                    li.nav-item.sidebar.active
+                        a.nav-link(href='/users/dashboard') Quản lý tài khoản
+                    li.nav-item
+                        a.nav-link(href='/users/posts') Quản lý bài đăng
+            .col-md-9.content
+                p.title Thông tin tài khoản 
+                .btn.btn-outline-secondary(onclick='inputEnable()') Cập nhật
+                form(action='/users/update', method='POST' enctype="multipart/form-data")
+                    .row
+                        .col-md-6.form-group
+                            label(for='fname') Họ:
+                            input.form-control.editable(type='text', value=data.fname, name='fname' disabled)
+                        .col-md-6.form-group
+                            label(for='lname') Tên:
+                            input.form-control.editable(type='text', value=data.lname, name='lname' disabled)
+                    .row 
+                        .col-md-6.form-group
+                            label(for='email') Email:
+                            input.form-control.editable(type='email', value=data.email, name='email' disabled)
+                        .col-md-6.form-group
+                            label(for='phone') Số điện thoại:
+                            input.form-control.editable(type='tel', value=data.phone, name='phone' disabled)
+                    .row
+                        .col-md-4.form-group
+                            label(for='dop') Ngày sinh:
+                            input.form-control.editable(type='date', value=data.dop, name='dop' disabled)
+                        .col-md-8.form-group
+                            label(for='address') Địa chỉ:
+                            input.form-control.editable(type='tel', value=data.address, name='address' disabled)
+                    .row 
+                        .col-md-9.form-group
+                            label(for='facebook') Facebook:
+                            input.form-control.editable(type='url', value=data.facebook, name='facebook' disabled)
+                        .col-md-3.form-group
+                            label(for='sex') Giới tính:
+                            select.custom-select.form-control.editable(name='sex' disabled)
+                                option(value='1') Nam 
+                                option(value='0') Nữ
+                    .row 
+                        .col-md-9.form-group
+                            label(for='avatar') Ảnh đại diện:
+                            input.form-control-file.border.editable(type='file', multiple accept="image/png, image/jpeg, image/jpg", name='avatar' disabled)
+                        .col-md-3.form-group
+                            input.btn.btn-primary.btn-block(type='hidden' value='Lưu thay đổi')
+    script(src='/javascripts/users.js')
+                    
+                            
+
+                        

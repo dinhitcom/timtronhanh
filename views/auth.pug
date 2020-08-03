@@ -1,0 +1,15 @@
+extends layout
+block content
+    .container
+        #auth
+            if mes == 'not_owner'
+                h3 Bạn không phải chủ sở hữu bài viết này này
+                a.btn.btn-primary(href='/') Quay lại trang chủ
+            else 
+                if mes == 'not_admin'
+                    h3 Bạn không phải quản trị viên
+                    a.btn.btn-primary(href='/') Quay lại trang chủ
+                else
+                    h3 Bạn cần đăng nhập để truy cập trang này
+                    a.btn.btn-primary(href='/users/login') Đăng nhập &nbsp; &nbsp;
+                    a.btn.btn-primary(href='/') Quay lại trang chủ

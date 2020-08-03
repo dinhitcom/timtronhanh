@@ -1,0 +1,38 @@
+extends layout
+block content
+    .container
+        .row 
+            #user_sidebar.col-md-3
+                p#welcome.text-center Xin chào #{data.fname} #{data.lname} 
+                .avatar.text-center
+                    if data.avatar
+                        img.rounded-circle(src='/'+data.avatar)
+                    else 
+                        img.rounded-circle(src='/images/avatar_template.png')
+                    
+                ul.nav.flex-column.sidebar
+                    li.nav-item.sidebar.active
+                        a.nav-link(href='/admin/') Quản lý toàn bộ tài khoản
+                    li.nav-item
+                        a.nav-link(href='/users/posts') Quản lý toàn bộ bài viết
+            .col-md-9
+                each user in users
+                    .row.post_manage
+                        .col-md-3.post_image
+                            img(src='/'+user.avatar)
+                        .col-md-6.post_content
+                            p.title=user.fname+` `+user.lname
+                            p=user.address
+                            p=user.phone  
+                            p=user.email                     
+                        .col-md-3.post_option
+                            .option
+                                 a(href='/admin/'+user.id+'/posts') Xem bài đã đăng
+                            .option
+                                a(href='/admin/'+user.id+'/block') Khóa tài khoản
+                    hr
+    script(src='/javascripts/users.js')
+                    
+                            
+
+                        

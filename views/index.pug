@@ -1,0 +1,143 @@
+extends layout
+block content
+    .carousel
+            #carouselExampleControls.carousel.slide(data-ride='carousel')
+                ol.carousel-indicators
+                    li.active(data-target='#carouselExampleControls', data-slide-to='0')
+                    li(data-target='#carouselExampleControls', data-slide-to='1')
+                    li(data-target='#carouselExampleControls', data-slide-to='2')
+                .carousel-inner
+                    .carousel-item.active
+                        img.d-block.w-100(src='/images/slideshow/slideshow1.png', alt='First slide')
+                        .carousel-caption.d-none.d-md-block
+                            h5 S&#x1EED; d&#x1EE5;ng d&#x1EC5; d&agrave;ng
+                            p Thu&ecirc; tr&#x1ECD; ch&#x1EC9; v&#x1EDB;i 3 b&#x1B0;&#x1EDB;c: t&igrave;m ki&#x1EBF;m, li&ecirc;n h&#x1EC7;, thanh to&aacute;n.
+                    .carousel-item
+                        img.d-block.w-100(src='/images/slideshow/slideshow2.png', alt='Second slide')
+                        .carousel-caption.d-none.d-md-block
+                            h5 Th&ocirc;ng tin ch&iacute;nh x&aacute;c
+                            p M&#x1ED7;i th&ocirc;ng tin &dstrok;&abreve;ng t&#x1EA3;i tr&ecirc;n website &dstrok;&#x1EC1;u &dstrok;&#x1B0;&#x1EE3;c x&aacute;c th&#x1EF1;c v&agrave; c&#x1EAD;p nh&#x1EAD;t li&ecirc;n t&#x1EE5;c.
+                    .carousel-item
+                        img.d-block.w-100(src='/images/slideshow/slideshow3.png', alt='Third slide')
+                        .carousel-caption.d-none.d-md-block
+                            h5 H&#x1ED7; tr&#x1EE3; t&#x1EAD;n t&igrave;nh
+                            p Ch&uacute;ng t&ocirc;i h&#x1ED7; tr&#x1EE3; tr&ecirc;n nhi&#x1EC1;u n&#x1EC1;n t&#x1EA3;ng kh&aacute;c nhau v&#x1EDB;i c&#x1EA3; ch&#x1EE7; tr&#x1ECD; v&agrave; ng&#x1B0;&#x1EDD;i thu&ecirc;.
+                    a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
+                        span.carousel-control-prev-icon(aria-hidden='true')
+                        span.sr-only Previous
+                    a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
+                        span.carousel-control-next-icon(aria-hidden='true')
+                        span.sr-only Next
+    .container
+        hr
+        h3.text-center THU&Ecirc; TR&#x1ECC; CH&#x1EC8; V&#x1EDA;I 3 B&#x1AF;&#x1EDA;C
+        hr
+        br
+        .row.text-center
+            .col-4
+                .row
+                    .col-2
+                        img.rounded-circle(alt='Search', src='/images/step1.png')
+                    .col-lg-6.col-10
+                        h4 T&igrave;m ki&#x1EBF;m
+            .col-4
+                .row
+                    .col-2
+                        img.rounded-circle(alt='Contact', src='/images/step2.png')
+                    .col-lg-6.col-10.ml-1
+                        h4 Li&ecirc;n h&#x1EC7;
+            .col-4
+                .row
+                    .col-2
+                        img.rounded-circle(alt='Pay', src='/images/step3.png')
+                    .col-lg-6.col-10.ml-1
+                        h4 Thanh to&aacute;n
+        br
+
+
+        .row
+            form#searchbox(action='/posts/search', method='POST')
+                .searchbox
+                    legend T&igrave;m ki&#x1EBF;m nhanh
+                    .row
+                        .col-lg-10
+                          .row
+                            .col-lg-3
+                                label(for='quan_huyen') Quận/huyện: 
+                                select.custom-select.form-control(name='quan_huyen')
+                                    option(selected value='all') T&#x1EA5;t c&#x1EA3;
+                                    each val in data
+                                        option(value=val.name_with_type) #{val.name_with_type}                      
+                            .col-lg-3
+                                label(for='phuong_xa') Phường/xã:
+                                select.custom-select.form-control(name='phuong_xa')
+                                    option(selected value='all') Tất cả
+                            
+                            .col-lg-3
+                                label(for='gia') Khoảng giá: 
+                                select.custom-select.form-control(name='gia_tien')
+                                    option(selected value='all') T&#x1EA5;t c&#x1EA3;
+                                    option(value="1") &lt; 1 tri&#x1EC7;u
+                                    option(value="2") 1 tri&#x1EC7;u - 1,5 tri&#x1EC7;u
+                                    option(value="3") 1,5 tri&#x1EC7;u - 2 tri&#x1EC7;u
+                                    option(value="4") &gt; 2 tri&#x1EC7;u
+                            .col-lg-3
+                                label(for='dien_tich') Diện tích: 
+                                select.custom-select.form-control(name='dien_tich')
+                                    option(selected value='all') Tất cả
+                                    option(value='1') &lt; 15m2
+                                    option(value='2') 15m2 - 20m2
+                                    option(value='3') 20m2 - 25m2
+                                    option(value='4') &gt; 25m2
+                        .col-lg-2
+                            br
+                            input.btn.btn-block.btn-success(type='submit' value='Tìm kiếm') 
+
+        <hr>
+        <h3 class="text-center">PHÒNG TRỌ NỔI BẬT</h2>
+        <hr>
+        .row.text-center
+            each post in posts
+                .col-md-4.pb-1.pb-md-0.mb-3
+                  
+                    .post_container
+                        .post_img
+                            a(href='/posts/'+post._id style='text')
+                                img(src=`/`+post.images[0])
+                        p.post_title=post.tieu_de
+                        .post_body
+                            p.price=post.gia
+                            p.mt-2=post.dia_chi+`, `+post.phuong_xa+`, `+post.quan_huyen 
+                            a.btn.btn-info.post_btn(href='/posts/'+post._id) Xem chi tiết
+             
+        ul.pagination
+                if page==1
+                    li.page-item.disabled
+                        a.page-link(href='#') Previous
+                    li.page-item.active
+                        a.page-link(href='/?page=1') 1
+                else 
+                    li.page-item 
+                        - page = page -1;
+                        a.page-link(href='/?page='+page) Previous
+                    li.page-item
+                        a.page-link(href='/?page=1') 1
+                if page==2
+                    li.page-item.active
+                        a.page-link(href='/?page=2') 2
+                else 
+                    li.page-item
+                        a.page-link(href='/?page=2') 2
+                if page==3
+                    li.page-item.active
+                        a.page-link(href='/?page=3') 3
+                    li.page-item.disabled
+                        a.page-link(href='#') Next 
+                else 
+                    li.page-item
+                        a.page-link(href='/?page=3') 3
+                    li.page-item
+                    - page = page +1;
+                        a.page-link(href='/?page='+page) Next    
+
+    script(src='/javascripts/index.js')

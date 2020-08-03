@@ -1,0 +1,37 @@
+extends layout
+block content
+  .container
+    #register-form
+        if error
+            .alert.alert-danger=error
+        //- TODO: form validation
+        form(action='/users/create', method='POST')
+            h2.text-center Đăng ký tài khoản
+            .form-group
+                .row
+                    .col-md-6
+                        input.form-control(type='text', name='fname', placeholder='Họ', value=values ? values.first_name : '' , required)
+                    .col-md-6
+                        input.form-control(type='text', name='lname', placeholder='Tên', value=values ? values.last_name : '' , required)
+            //- TODO: check exist username, email
+            .form-group
+                input.form-control(type='text', name='username', placeholder='Tên đăng nhập', value=values ? values.username : '' , required)    
+            .form-group
+                .row
+                    .col-md-6
+                        input.form-control(type='password', name='password', placeholder='Mật khẩu', required)
+                    .col-md-6
+                        input.form-control(type='password', name='confirm_password', placeholder='Xác nhận mật khẩu', required)  
+            .form-group
+                input.form-control(type='email', name='email', placeholder='Email', value=values ? values.email : '' , required)
+            //- .form-group
+            //-     input.form-control(type='text', name='phone', placeholder='Số điện thoại')
+            //- .form-group
+            //-     input.form-control(type='text', name='address', placeholder='Địa chỉ')
+            //- .form-group
+            //-     iput.form-control(type='date', name='dop', min='1900-1-1')
+            .form-group
+                button.btn.btn-success.btn-lg.btn-block(type='submit') Đăng Ký
+            .text-center
+                | Đã có tài khoản? 
+                a(href='/users/login') Đăng nhập

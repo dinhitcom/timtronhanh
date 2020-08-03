@@ -1,0 +1,25 @@
+extends layout
+block content
+    .container#form
+      #login-form
+        if error
+          .alert.alert-danger= error 
+        if message 
+          .alert.alert-success= message
+        form(action='/users/login', method='POST')
+            h2.text-center Đăng nhập
+            .form-group
+              input.form-control(type='text', name='username', value=values ? values.username : '', placeholder='Tên đăng nhập', required)
+            .form-group
+              input.form-control(type='password', name='password', placeholder='Mật khẩu', required)
+            .form-group
+              button.btn.btn-primary.btn-block(type='submit') Đăng nhập
+            .clearfix
+              label.float-left.checkbox-inline
+                input(type='checkbox')
+                |  Lưu mật khẩu
+                
+              a.float-right(href='#') Quên mật khẩu?
+        p.text-center
+            | Chưa có tài khoản? 
+            a(href='/users/create') Đăng ký

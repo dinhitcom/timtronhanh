@@ -1,0 +1,103 @@
+doctype html
+html
+  head
+    title= `Timtronhanh.vn - Tìm phòng trọ`
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='icon', href='/images/favicon.ico', type='image/x-icon')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:400,700', rel='stylesheet')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat:500', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Titillium+Web:700,900', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+    script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+    script(src='https://kit.fontawesome.com/d8a0810dd5.js', crossorigin='anonymous')
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css')
+    
+  body
+    block navbar
+      nav.navbar.navbar-light.navbar-expand-lg.justify-content-center.fixed-top#topNav
+        a.navbar-brand.d-flex.w-50.mr-auto(href='/') 
+          img(src='/images/brand-logov2.png' alt='Brand Logo')
+
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar')
+          span.navbar-toggler-icon
+        #collapsingNavbar.navbar-collapse.collapse.w-100
+          ul.navbar-nav.w-100.justify-content-center#topNavcenter
+            if pagename == 'index' 
+              li.nav-item.active
+                a.nav-link(href='/') Trang chủ
+                  span.sr-only (current)
+            else
+              li.nav-item
+                a.nav-link(href='/') Trang chủ
+
+            //- if pagename == 'search' 
+            //-   li.nav-item.active
+            //-     a.nav-link(href='/search') Tìm kiếm
+            //-       span.sr-only (current)
+            //- else
+            //-   li.nav-item
+            //-     a.nav-link(href='/search') Tìm kiếm
+
+            if pagename == 'post' 
+              li.nav-item.active
+                a.nav-link(href='/posts') Phòng trọ
+                  span.sr-only (current)
+            else
+              li.nav-item
+                a.nav-link(href='/posts') Phòng trọ
+
+            //- if pagename == 'contact' 
+            //-   li.nav-item.active
+            //-     a.nav-link(href='/contact') Liên hệ
+            //-       span.sr-only (current)
+            //- else
+            //-   li.nav-item
+            //-     a.nav-link(href='/contact') Liên hệ
+          if !status 
+            ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
+              li.nav-item
+                a.nav-link.btn-post(href='/posts/create') Đăng tin  
+              li.nav-item
+                a.nav-link(href='/users/create') Đăng ký
+              li.nav-item
+                a.nav-link(href='/users/login') Đăng nhập
+          else if status = 'logged'
+            ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
+              li.nav-item
+                a.nav-link.btn-post(href='/posts/create') Đăng tin  
+              li.nav-item
+                a.nav-link(href='/users/dashboard') Tài khoản
+              li.nav-item
+                a.nav-link(href='/users/logout') Đăng xuất
+         
+            
+
+    block content
+    block footer
+      .container-fluid.text-black.p-4#footer
+        .row
+          .col-6.col-md-8.col-lg-7  
+          .col-md-4.col-lg-5.col-6
+            address
+              a(href='/')
+                img(src='/images/brand-logov2.png', alt='', style='height: 34px;')
+              br
+              strong www.Timtronhanh.vn
+              br
+              // Văn phòng đại diện:<br>
+              | 123 Nguyễn Văn A, Ngũ Hành Sơn, Đà Nẵng
+              br
+              abbr(title='Phone') S&Dstrok;T:
+              |  0123.456.789
+            address
+              strong Nguy&#x1EC5;n Ng&#x1ECD;c &Dstrok;&#x1ECB;nh
+              br
+              a(href='mailto:#') nndinh.18it5@sict.udn.vn
+      .text-center
+        p Copyright &copy; Nguyen Ngoc Dinh. All rights reserved.

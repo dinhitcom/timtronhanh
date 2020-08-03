@@ -1,0 +1,213 @@
+extends layout
+block content
+  .container
+    #create_post
+      if error
+        .alert.alert-danger= error
+      form(action='/posts/create', method='POST' enctype="multipart/form-data")
+        h2.text-left Đăng tin mới
+        .form-group
+          label(for="tieu_de") Tiêu đề tin 
+          span.required *
+          input.form-control(type='text', name='tieu_de', value=values ? values.title : '', placeholder='Tiêu đề đăng tin', required)
+        .row
+          .col-md-3.col-6.form-group
+            label(for='hinh_thuc_tro') Hình thức trọ
+            select.custom-select(name='hinh_thuc_tro')
+              option(selected value='Phòng trọ') Phòng trọ
+              option(value='Ký túc xá') Ký túc xá
+              option(value='Căn hộ') Chung cư mini
+              option(value='Nhà nguyên căn') Trọ nguyên căn
+              option(value='Homestay') Homestay
+          .col-md-3.col-6.form-group
+            label(for='quan_ly') Quản lý
+            select.custom-select(name='quan_ly')
+              option(value='Tự quản') Tự quản
+              option(value='Chung chủ') Chung chủ
+          .col-md-3.col-6.form-group
+            label(for='so_phong_trong') Phòng trống
+            input.form-control(type='number' value=1 min=1 name='so_phong_trong')
+          .col-md-3.col-6.form-group
+            label(for='tong_so_phong') Tổng số phòng
+            input.form-control(type='number' min=1 name='tong_so_phong')
+        .row
+          .col-md-3.col-6.form-group
+            label(for='o_toi_da') Số người tối đa
+            input.form-control(type='number' min=1 name='o_toi_da')
+          .col-md-3.col-6.form-group
+            label(for='gia') Giá phòng
+            span.required *
+            .input-group
+              input.form-control(type='number' min=0, step=1000 name='gia' required)
+              .input-group-append
+                span.input-group-text VNĐ
+          .col-md-3.col-6.form-group
+            label(for='dien_tich') Diện tích phòng
+            span.required *
+            .input-group
+              input.form-control(type='number' name='dien_tich' min=1 required)
+              .input-group-append
+                span.input-group-text m 
+                  sup 2
+          .col-md-3.col-6.form-group
+            label(for='gioi_tinh') Giới tính ưu tiên
+            select.custom-select(name='gioi_tinh')
+              option(selected value='Tất cả') -- Tất cả --
+              option(value='Nam') Nam
+              option(value='Nữ') Nữ
+        p(style='margin: 8px 0') Đối tượng
+        .row.pretty-checkbox
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='doi_tuong' value='Đi học')
+            .state.p-primary
+              label Đi học
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='doi_tuong' value='Đi làm')
+            .state.p-primary
+              label Đi làm
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='doi_tuong' value='Gia đình')
+            .state.p-primary
+              label Gia đình
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='doi_tuong' value='Cặp đôi')
+            .state.p-primary
+              label Cặp đôi
+        p(style='margin: 8px 0') Tiện nghi
+        .row.pretty-checkbox
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Gác lửng')
+            .state.p-success
+              label Gác lửng
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Wifi')
+            .state.p-success
+              label Wifi
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Vệ sinh trong')
+            .state.p-success
+              label Vệ sinh trong
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Điều hòa')
+            .state.p-success
+              label Điều hòa
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Tủ lạnh')
+            .state.p-success
+              label Tủ lạnh
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Kệ bếp')
+            .state.p-success
+              label Kệ bếp
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Máy giặt')
+            .state.p-success
+              label Máy giặt
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Tivi')
+            .state.p-success
+              label Tivi
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Giường')
+            .state.p-success
+              label Giường
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Camera an ninh')
+            .state.p-success
+              label Camera an ninh
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Ban công/sân thượng')
+            .state.p-success
+              label Ban công/sân thượng
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='tien_nghi' value='Bình nóng lạnh')
+            .state.p-success
+              label Bình nóng lạnh
+        p(style='margin: 8px 0') Môi trường xung quanh
+        .row.pretty-checkbox
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Chợ')
+            .state.p-info
+              label Chợ
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Siêu thị')
+            .state.p-info
+              label Siêu thị
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Bệnh viện')
+            .state.p-info
+              label Bệnh viện
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Trường học')
+            .state.p-info
+              label Trường học
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Công viên')
+            .state.p-info
+              label Công viên
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Bến xe Bus')
+            .state.p-info
+              label Bến xe Bus
+          .col-md-3.col-6.pretty.p-default.p-smooth
+            input(type='checkbox' name='moi_truong' value='Phòng gym')
+            .state.p-info
+              label Phòng gym
+        .row.mt-3
+          .col-md-3.col-6.form-group
+            label(for='quan_huyen') Quận/Huyện
+            span.required *
+            select.custom-select(name='quan_huyen' required)
+              option(selected value='default') -- Chọn Quận/Huyện --
+              each val in data
+                  option(value=val.name_with_type) #{val.name_with_type}
+          .col-md-3.col-6.form-group
+            label(for='phuong_xa') Phường/Xã
+            span.required *
+            select.custom-select(name='phuong_xa' required)
+              option(selected value='default') -- Chọn Phường/Xã --
+          .col-md-6.col-12.form-group
+            label(for='dia_chi') Địa chỉ
+            span.required *
+            input.form-control(type='text' name='dia_chi' placeholder='Nhập địa chỉ chi tiết', required)
+        .row
+          .col-12.form-group
+            label(for='mo_ta') Mô tả chi tiết:
+            textarea.form-control(rows='5' placeholder='Mô tả chi tiết, thông tin thêm về phòng trọ của bạn' name='mo_ta')
+        p(style='font-weight: bold') Thông tin liên hệ 
+        .row
+          .col-md-6.col-12.form-group
+            label(for='ho_ten') Họ tên
+            plan.required * 
+            input.form-control(type='text' name='ho_ten' required)
+          .col-md-6.col-12.form-group
+            label(for='dien_thoai') Số điện thoại
+            span.required * 
+            input.form-control(type='tel' name='dien_thoai' required)
+          .col-md-6.col-12.form-group
+            label(for='email') Email 
+            input.form-control(type='email' placeholder='Địa chỉ email của bạn' name='email')
+          .col-md-6.col-12.form-group
+            label(for='facebook') Facebook
+            input.form-control(type='text' placeholder='Link facebook của bạn' name='facebook')
+        p(style='font-weight: bold') Thêm hình ảnh
+        span.required *
+        | Bạn có thể chọn một hoặc nhiều hình ảnh, tối đa 10 hình ảnh. 
+        row
+         .col.form-group
+          input.form-control-file.border(type='file', multiple accept="image/png, image/jpeg, image/jpg", name='room_images' required)
+        input.btn.btn-primary(type='submit' value='Đăng tin')
+      script(src='/javascripts/posts.js')
+
+        
+        
+            
+
+        
+
+
+
+
+
+
+
